@@ -5,6 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CV — Marcos Galván López</title>
 <link rel="stylesheet" href="assets/style.css">
+<style>
+  /* Tab controls for the three document views. If your style.css already
+     defines .tabs/.tab classes, feel free to delete this block and reuse those. */
+  .doc-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.5rem 0 1rem;
+    flex-wrap: wrap;
+  }
+  .doc-tab {
+    padding: 0.5rem 1rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+    opacity: 0.6;
+  }
+  .doc-tab[aria-selected="true"] {
+    opacity: 1;
+    font-weight: 600;
+  }
+  .doc-panel {
+    display: none;
+  }
+  .doc-panel.active {
+    display: block;
+  }
+</style>
 </head>
 <body>
   <main class="wrap wrap--cv">
@@ -12,21 +41,78 @@
     <h1>CV</h1>
 
     <!--
-      HOW TO ADD YOUR PDF
-      1. Rename your file exactly to: cv.pdf
-      2. Drop it in this same folder (next to cv.html).
-      3. Done — the embed and download button below will pick it up automatically.
+      HOW TO ADD YOUR PDFS
+      1. Rename your files exactly to: cv-industry.pdf, cv-academic.pdf, research-proposal.pdf
+      2. Drop them in this same folder (next to cv.html).
+      3. Done — each embed and download button below will pick up its file automatically.
     -->
-    <div class="pdf-frame">
-      <object data="cv.pdf" type="application/pdf">
-        <p class="fallback">
-          Couldn't display the PDF inline. Add your file as <code>cv.pdf</code> in this
-          folder, or <a href="cv.pdf">download it directly</a>.
-        </p>
-      </object>
+
+    <div class="doc-tabs" role="tablist" aria-label="Document selector">
+      <button class="doc-tab" id="tab-industry" role="tab" aria-selected="true" aria-controls="panel-industry">Industry CV</button>
+      <button class="doc-tab" id="tab-academic" role="tab" aria-selected="false" aria-controls="panel-academic">Academic CV</button>
+      <button class="doc-tab" id="tab-research" role="tab" aria-selected="false" aria-controls="panel-research">Research Proposal</button>
     </div>
 
-    <a class="cta" href="cv.pdf" download>Download CV (PDF)</a>
+    <section class="doc-panel active" id="panel-industry" role="tabpanel" aria-labelledby="tab-industry">
+      <div class="pdf-frame">
+        <object data="cv-industry.pdf" type="application/pdf">
+          <p class="fallback">
+            Couldn't display the PDF inline. Add your file as <code>cv-industry.pdf</code> in this
+            folder, or <a href="cv-industry.pdf">download it directly</a>.
+          </p>
+        </object>
+      </div>
+      <a class="cta" href="cv-industry.pdf" download>Download Industry CV (PDF)</a>
+    </section>
+
+    <section class="doc-panel" id="panel-academic" role="tabpanel" aria-labelledby="tab-academic">
+      <div class="pdf-frame">
+        <object data="cv-academic.pdf" type="application/pdf">
+          <p class="fallback">
+            Couldn't display the PDF inline. Add your file as <code>cv-academic.pdf</code> in this
+            folder, or <a href="cv-academic.pdf">download it directly</a>.
+          </p>
+        </object>
+      </div>
+      <a class="cta" href="cv-academic.pdf" download>Download Academic CV (PDF)</a>
+    </section>
+
+    <section class="doc-panel" id="panel-research" role="tabpanel" aria-labelledby="tab-research">
+      <div class="pdf-frame">
+        <object data="research-proposal.pdf" type="application/pdf">
+          <p class="fallback">
+            Couldn't display the PDF inline. Add your file as <code>research-proposal.pdf</code> in this
+            folder, or <a href="research-proposal.pdf">download it directly</a>.
+          </p>
+        </object>
+      </div>
+      <a class="cta" href="research-proposal.pdf" download>Download Research Proposal (PDF)</a>
+    </section>
   </main>
+
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.doc-tab');
+      var panels = {
+        'tab-industry': document.getElementById('panel-industry'),
+        'tab-academic': document.getElementById('panel-academic'),
+        'tab-research': document.getElementById('panel-research')
+      };
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) {
+            t.setAttribute('aria-selected', 'false');
+          });
+          Object.values(panels).forEach(function (p) {
+            p.classList.remove('active');
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          panels[tab.id].classList.add('active');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
