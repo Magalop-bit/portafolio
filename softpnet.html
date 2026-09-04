@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Symbol Grounding for Prototypical Concepts</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+    /* Tab controls for the three document views. If your style.css already
+        defines .tabs/.tab classes, feel free to delete this block and reuse those. */
+    .doc-tabs {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1.5rem 0 1rem;
+        flex-wrap: wrap;
+    }
+    .doc-tab {
+        padding: 0.5rem 1rem;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        background: transparent;
+        cursor: pointer;
+        font: inherit;
+        opacity: 0.6;
+    }
+    .doc-tab[aria-selected="true"] {
+        opacity: 1;
+        font-weight: 600;
+    }
+    .doc-panel {
+        display: none;
+    }
+    .doc-panel.active {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+    <main class="wrap softpnet-paper">
+    <a class="back" href="index.html">&larr; Back</a>
+    <h1>Soft Symbol Grounding for Prototypical Concepts</h1>
+    <div class="pdf-frame">
+    <object data="softpnet.pdf" type="application/pdf">
+        <p class="fallback">
+        Couldn't display the PDF inline. Add your file as <code>softpnet.pdf</code> in this
+        folder, or <a href="softpnet.pdf">download it directly</a>.
+        </p>
+    </object>
+    </div>
+    <a class="cta" href="softpnet.pdf" download>Download Paper (PDF)</a>
+    </main>
+</body>
+</html>
